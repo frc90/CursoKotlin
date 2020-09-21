@@ -39,9 +39,9 @@ class RetrofitActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 if (response.isSuccessful) {
-//                    response.body()?.let { posts ->
-//                        (rv_retrofit.adapter as PostsAdapter).setListOfPost(listP)
-//                    }
+                    response.body()?.let { posts ->
+                        (rv_retrofit.adapter as PostsAdapter).setListOfPost(posts)
+                    }
 
                     val posts = response?.body()
                     var content = ""
@@ -52,14 +52,8 @@ class RetrofitActivity : AppCompatActivity() {
                         content += "Body: " + post.body + "\n"
                         content += "__________________________" + "\n"
                     }
-                    tv_jsonPlaceholder.append(content)
 
 //                    Log.i("TAG_LOG", Gson().toJson(posts))
-
-//                    response.body()?.let {
-//                        tv_jsonPlaceholder.text = "Code: " + response.code()
-//                            .toString() + "\n" + "Body: " + response.body().toString()
-//                    }
                 } else {
                     Toast.makeText(this@RetrofitActivity, response.message(), Toast.LENGTH_LONG)
                         .show()
